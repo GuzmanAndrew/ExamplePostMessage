@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Html5 postMessage comunicación entre documentos</title>
+</head>
+
+<body>
+   <input type="text" id="text">
+   <input type="button" id="send" value="Enviar"><br /><br />
+   <div>
+      ventana localhost
+      <div id="div2" style="border:solid 1px black;width:500px;height: 200px;"></div>
+   </div>
+
+   <br />
+   <iframe id="ifr" src="http://127.0.0.1:5500/app.html"></iframe>
+
+
+   <script type="text/javascript">
+      var text = document.getElementById('text'),
+         send = document.getElementById('send'),
+         div2 = document.getElementById('div2'),
+         // ifr = window.frames[0];
+         ifr = document.getElementById('ifr').contentWindow;
+      window.addEventListener('message', function (ev) {
+         if (ev.origin === 'http://127.0.0.1:5500') {
+            // alert ('Mensaje de' + ev.origin + ':: + ev.data);
+            div2.innerHTML += ev.data;
+         }
+      });
+
+      send.addEventListener('click', function () {
+         // La ventana principal postMessage envía un mensaje a la ventana secundaria del iframe.
+         // La ventana secundaria recibe mensajes al escuchar el evento del mensaje
+         ifr.postMessage(text.value, 'http://127.0.0.1:5500');
+      })
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title></title>
+</head>
+<script type="text/javascript">
+   // Escucha el evento de mensajes en la ventana del iframe y recibe mensajes
+   window.addEventListener('message', function (event) {
+      var div1 = document.getElementById('div1');
+
+      if (event.origin === 'http://localhost:8080') {
+         div1.innerHTML += "Desde la ventana" + event.origin + ":" + event.data + "<br>";
+      }
+      // Enviar un mensaje a la página principal
+      event.source.postMessage(this.location + ": Recibido", event.origin);
+
+   });
+</script>
+
+<body>
+   iframe:huan1
+   <div id="div1"></div>
+</body>
+
+</html>
