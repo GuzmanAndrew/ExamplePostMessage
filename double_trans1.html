@@ -14,27 +14,28 @@
    </div>
 
    <br />
-   <iframe id="ifr" src="http://127.0.0.1:5500/app.html"></iframe>
+   <iframe id="ifr" src="https://blesoft.com.co/double_trans2.html"></iframe>
 
 
    <script type="text/javascript">
       var text = document.getElementById('text'),
-         send = document.getElementById('send'),
-         div2 = document.getElementById('div2'),
-         // ifr = window.frames[0];
-         ifr = document.getElementById('ifr').contentWindow;
-      window.addEventListener('message', function (ev) {
-         if (ev.origin === 'http://127.0.0.1:5500') {
-            // alert ('Mensaje de' + ev.origin + ':: + ev.data);
-            div2.innerHTML += ev.data;
-         }
-      });
+            send = document.getElementById('send'),
+            div2 = document.getElementById('div2'),
+            // ifr = window.frames[0];
+            ifr = document.getElementById('ifr').contentWindow;
+         window.addEventListener('message', function (ev) {
+            if (ev.origin === 'https://blesoft.com.co') {
+               // alert ('Mensaje de' + ev.origin + ':: + ev.data);
+               div2.innerHTML += ev.data;
+            }
+         });
 
-      send.addEventListener('click', function () {
-         // La ventana principal postMessage envía un mensaje a la ventana secundaria del iframe.
-         // La ventana secundaria recibe mensajes al escuchar el evento del mensaje
-         ifr.postMessage(text.value, 'http://127.0.0.1:5500');
-      })
+         send.addEventListener('click', function () {
+            // La ventana principal postMessage envía un mensaje a la ventana secundaria del iframe.
+            // La ventana secundaria recibe mensajes al escuchar el evento del mensaje
+            console.log(text.value);
+            ifr.postMessage(text.value, 'https://blesoft.com.co');
+         })
    </script>
 </body>
 
